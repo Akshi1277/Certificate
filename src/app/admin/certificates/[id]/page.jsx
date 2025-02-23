@@ -36,7 +36,7 @@ const CertificatePage = () => {
   if (error) return <p className="text-center text-red-500">{error}</p>;
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white p-8">
+    <div className="min-h-screen flex items-center justify-center bg-[#321356]  text-white p-8">
       <div className="w-full max-w-2xl p-8 bg-white text-gray-900 rounded-lg shadow-xl border-4 border-gray-300 text-center">
         <h1 className="text-4xl font-bold text-blue-600">Certificate of Completion</h1>
         <p className="mt-4 text-xl">This is to certify that</p>
