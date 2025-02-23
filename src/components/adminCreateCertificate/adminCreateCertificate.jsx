@@ -34,9 +34,9 @@ const AdminCreateCertificate = () => {
           course,
           date: formatDate(date), // Send formatted date
           fileUrls: {
-            png: `https://your-storage.com/certificates/${certificateId}.png`,
-            pdf: `https://your-storage.com/certificates/${certificateId}.pdf`,
-          }, // ✅ Corrected structure
+            png: `/certificates/${certificateId}.png`,
+            pdf: `/certificates/${certificateId}.pdf`,
+          },
         }),
       });
   
@@ -44,7 +44,7 @@ const AdminCreateCertificate = () => {
       if (response.ok) {
         alert("Certificate created successfully!");
         setTimeout(() => {
-          router.push(`/admin/certificates/${certificateId}`);
+          router.push("/admin/certificates"); // Redirect to admin certificates page
         }, 1500);
       } else {
         alert(data.message || "Error creating certificate");
@@ -58,15 +58,15 @@ const AdminCreateCertificate = () => {
   };
   
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white">
-      <div className="w-full max-w-lg p-8 bg-gray-800 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold text-center mb-6 text-blue-400">Create Certificate</h1>
+    <div className="min-h-screen flex items-center justify-center bg-[#3a1247] text-white">
+      <div className="w-full max-w-lg p-8 bg-[#241246]  rounded-lg shadow-lg">
+        <h1 className="text-3xl font-bold text-center mb-6 text-red-300 ">Create Certificate</h1>
 
         {/* Name Input */}
         <input
           type="text"
           placeholder="Enter Name"
-          className="w-full p-3 rounded-md bg-gray-700 text-white mb-4"
+          className="w-full p-3 rounded-md bg-[#321356] text-white mb-4"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
@@ -74,14 +74,14 @@ const AdminCreateCertificate = () => {
         {/* Date Input */}
         <input
           type="date"
-          className="w-full p-3 rounded-md bg-gray-700 text-white mb-4"
+          className="w-full p-3 rounded-md bg-[#321356] text-white mb-4"
           value={date}
           onChange={(e) => setDate(e.target.value)}
         />
 
         {/* Course Dropdown */}
         <select
-          className="w-full p-3 rounded-md bg-gray-700 text-white mb-4"
+          className="w-full p-3 rounded-md bg-[#321356] hover:bg- text-white mb-4"
           value={course}
           onChange={(e) => setCourse(e.target.value)}
         >
@@ -92,7 +92,7 @@ const AdminCreateCertificate = () => {
         {/* Generate Button */}
         <button
           onClick={handleGenerateCertificate}
-          className="w-full bg-red-700 hover:bg-pink-600 text-white font-bold py-3 rounded-md transition"
+          className="w-full bg-pink-950 hover:bg-red-900 text-white font-bold py-3 rounded-md transition"
           disabled={loading}
         >
           {loading ? "Generating..." : "Generate Certificate"}
