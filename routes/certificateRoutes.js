@@ -36,22 +36,37 @@ router.post("/create", async (req, res) => {
     const pdfPath = path.join(certificatesDir, `${certificateId}.pdf`);
 
     // ✅ Step 1: Generate PNG with Canvas
-    const canvas = createCanvas(800, 600);
+    const canvas = createCanvas(1024, 768);
     const ctx = canvas.getContext("2d");
 
-    // Load background image (OPTIONAL: Replace with your own template)
+    // Load the uploaded template
     const background = await loadImage(path.join(certificatesDir, "certificate-template.png"));
-    // Change this to your actual template
-    ctx.drawImage(background, 0, 0, 800, 600);
+    ctx.drawImage(background, 0, 0, 1024, 768);
 
-    // Add text to PNG
-    ctx.fillStyle = "black";
-    ctx.font = "30px Arial";
-    ctx.fillText("Certificate of Completion", 200, 100);
-    ctx.fillText(`Name: ${username}`, 200, 200);
-    ctx.fillText(`Course: ${course}`, 200, 300);
-    ctx.fillText(`Date: ${date}`, 200, 400);
-    ctx.fillText(`Certificate ID: ${certificateId}`, 200, 500);
+    // ✅ Text Positions Based on Your Template
+    ctx.fillStyle = "white"; // White text for visibility on dark background
+    ctx.font = "35px Times new roman";
+    ctx.textAlign = "center";
+
+    // Name
+    ctx.fillText(username, 400, 380);
+
+    // Course Name
+    ctx.font = "24px Times new roman";
+    ctx.fillText(`For successfully completing the course: ${course}`, 413, 443);
+
+    // Date (Bottom Left)
+    ctx.font = "24px Times new roman";
+    ctx.textAlign = "center";
+    ctx.fillText(date, 175, 650);
+
+    // Signature (Bottom Right)
+    ctx.textAlign = "right";
+    ctx.fillText("Code4Bharat", 690, 650);
+
+    // ✅ Certificate ID (Bottom Center)
+    ctx.textAlign = "center";
+    ctx.fillText(`Certificate ID: ${certificateId}`, 512, 700); // Added certificate ID
 
     // Save PNG
     const buffer = canvas.toBuffer("image/png");
@@ -65,7 +80,7 @@ router.post("/create", async (req, res) => {
       <head>
         <style>
           body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
-          h1 { color: blue; }
+          h1 { color: gold; }
         </style>
       </head>
       <body>
@@ -75,7 +90,7 @@ router.post("/create", async (req, res) => {
         <p>has successfully completed the course</p>
         <h3>${course}</h3>
         <p>on ${date}</p>
-        <h4>Certificate ID: ${certificateId}</h4>
+        <p><strong>Certificate ID:</strong> ${certificateId}</p> <!-- Added certificate ID to PDF -->
       </body>
       </html>
     `);
