@@ -27,8 +27,8 @@ const AdminCertificates = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white">
-      <div className="w-full max-w-4xl p-8 bg-gray-800 rounded-lg shadow-lg">
+    <div className="min-h-screen flex items-center justify-center bg-[#321356]  text-white">
+      <div className="w-full max-w-4xl p-8 bg-[#321356]  rounded-lg shadow-lg">
         <h1 className="text-3xl font-bold text-center mb-6 text-blue-400">View Certificates</h1>
 
         {loading ? (
@@ -51,20 +51,22 @@ const AdminCertificates = () => {
                     <td className="p-3">{cert.course}</td>
                     <td className="p-3">{cert.certificateId}</td>
                     <td className="p-3">
-                      <a
-                        href={`http://localhost:5000${cert.fileUrls.png}`}
-                        download
-                        className="bg-blue-500 hover:bg-blue-600 px-3 py-1 rounded-md mx-1 text-sm"
-                      >
-                        Download PNG
-                      </a>
-                      <a
-                        href={`http://localhost:5000${cert.fileUrls.pdf}`}
-                        download
-                        className="bg-green-500 hover:bg-green-600 px-3 py-1 rounded-md mx-1 text-sm"
-                      >
-                        Download PDF
-                      </a>
+                    <a
+                       href={cert.fileUrls?.pdf ? `http://localhost:5000${cert.fileUrls.pdf}` : "#"}
+                                download
+                                className="bg-blue-500 hover:bg-blue-600 px-2 py-0.5 rounded-md mr-4"
+                          >
+                               Download PDF
+                    </a>
+
+                    <a
+                             href={cert.fileUrls?.png ? `http://localhost:5000${cert.fileUrls.png}` : "#"}
+                            download
+                                className="bg-blue-500 hover:bg-blue-600 px-2 py-0.5 rounded-md mr-4"
+                                >
+                                      Download PNG
+                        </a>
+
                     </td>
                   </tr>
                 ))}
